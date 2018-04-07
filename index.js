@@ -25,7 +25,7 @@ const start = () => {
 
 const drawSnake = (snake, index) => {
   canvas.save();
-  canvas.fillStyle = snakeUnit.color;
+  canvas.fillStyle = (index === 0) ? '#E0A23B' : snakeUnit.color;
   canvas.fillRect(snake.x, snake.y, snakeUnit.width, snakeUnit.height);
   canvas.restore();
 }
