@@ -1,8 +1,10 @@
 :root {
   --bkgd: #262626;
   --snake: #9AFA55;
-  --food: #ED3324;
+  --apple: #ED3324;
   --score: #6FFBE3;
+
+  --font: 'Montserrat', sans-serif;
 }
 
 * {
@@ -22,7 +24,7 @@ html {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font);
   background-color: var(--bkgd);
 }
 
@@ -45,5 +47,6 @@ body {
 #canvas {
   border: 2px solid var(--snake);
   background: transparent;
+  font-family: var(--font);
   display: block;
 }
