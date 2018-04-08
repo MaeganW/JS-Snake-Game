@@ -16,13 +16,13 @@ const apple = {
 
 document.onkeydown = (e) => {
   if (e.keyCode === 37) {
-    direction = 0;
+    direction = 0; //left
   } else if (e.keyCode === 38) {
-    direction = 1;
+    direction = 1; //up
   } else if (e.keyCode === 39) {
-    direction = 2;
+    direction = 2; //right
   } else if (e.keyCode === 40) {
-    direction = 3;
+    direction = 3; //down
   }
 }
 
@@ -35,56 +35,20 @@ const start = () => {
 
   food = [];
   direction = 99; //wont go anywhere
-  setInterval(updateSnakePosition, 1000);
+  setInterval(updateSnakePosition, 20); //speed of snake
 }
 
 const drawSnake = (snake, index) => {
   canvas.save();
-  console.log(index);
   canvas.fillStyle = (index === 0) ? '#E0A23B' : snakeUnit.color;
-  console.log(snake.x);
-  console.log(snake.y);
   canvas.fillRect(snake.x, snake.y, snakeUnit.width, snakeUnit.height);
   canvas.restore();
 }
 
-// const updateSnake = () => {
-//   snake.reverse();
-//   snake.forEach((unit, index) => {
-//     if (direction === 0) { //left
-//       if (index === 0) {
-//         unit.x = unit.x - 5;
-//       } else {
-//         unit.x = snake[index - 1].x;
-//         unit.y = snake[index - 1].y;
-//       }
-//     } else if (direction === 1) { //up
-//       if (index === 0) {
-//         unit.y = unit.y - 5;
-//         console.log('first')
-//       } else {
-//         unit.x = snake[index - 1].x;
-//         unit.y = snake[index - 1].y;
-//         console.log('body')
-//       }
-//     } else if (direction === 2) { //right
-//       if (index === 0) {
-//         unit.x = unit.x + 5;
-//       } else {
-//         unit.x = snake[index - 1].x;
-//         unit.y = snake[index - 1].y;
-//       }
-//     } else if (direction === 3) { //down
-//       if (index === 0) {
-//         unit.y = unit.y + 5;
-//       } else {
-//         unit.x = snake[index - 1].x;
-//         unit.y = snake[index - 1].y;
-//       }
-//     }
-//   })
-//   snake.reverse();
-// }
+const moveUnitToPositionOfPrevious = (index) => {
+  snake[index].x = snake[index - 1].x;
+  snake[index].y = snake[index - 1].y;
+}
 
 const updateSnake = () => {
   for (var index = snake.length - 1; index >= 0; index--) {
@@ -92,31 +56,25 @@ const updateSnake = () => {
       if (index === 0) {
         snake[index].x = snake[index].x - 10;
       } else {
-        snake[index].x = snake[index - 1].x;
-        snake[index].y = snake[index - 1].y;
+        moveUnitToPositionOfPrevious(index);
       }
     } else if (direction === 1) { //up
       if (index === 0) {
         snake[index].y = snake[index].y - 10;
-        console.log('first')
       } else {
-        snake[index].x = snake[index - 1].x;
-        snake[index].y = snake[index - 1].y;
-        console.log('body')
+        moveUnitToPositionOfPrevious(index);
       }
     } else if (direction === 2) { //right
       if (index === 0) {
         snake[index].x = snake[index].x + 10;
       } else {
-        snake[index].x = snake[index - 1].x;
-        snake[index].y = snake[index - 1].y;
+        moveUnitToPositionOfPrevious(index);
       }
     } else if (direction === 3) { //down
       if (index === 0) {
         snake[index].y = snake[index].y + 10;
       } else {
-        snake[index].x = snake[index - 1].x;
-        snake[index].y = snake[index - 1].y;
+        moveUnitToPositionOfPrevious(index);
       }
     }
   }
