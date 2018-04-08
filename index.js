@@ -51,6 +51,7 @@ const moveUnitToPositionOfPrevious = (index) => {
 }
 
 const updateSnake = () => {
+  //iterrate from the back of the loop
   for (var index = snake.length - 1; index >= 0; index--) {
     if (direction === 0) { //left
       if (index === 0) {
@@ -83,7 +84,24 @@ const updateSnake = () => {
 const updateSnakePosition = () => {
   canvas.clearRect(0, 0, canvasWidth, canvasHeight);
   snake.forEach(drawSnake);
+  checkSnakePosition();
   updateSnake();
+}
+
+// check that snake does not exit bounds of the canvas
+const checkSnakePosition = () => {
+  if (snake[0].x > 500) {
+    snake[0].x = 0;
+  }
+  if (snake[0].x < 0) {
+    snake[0].x = 500;
+  }
+  if (snake[0].y > 500) {
+    snake[0].y = 0;
+  }
+  if (snake[0].y < 0) {
+    snake[0].y = 500;
+  }
 }
 
 const drawFood = (apple, index) => {
