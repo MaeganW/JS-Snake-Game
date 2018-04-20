@@ -1,5 +1,5 @@
 const canvas = document.getElementById('canvas').getContext('2d');
-let snake, food;
+let snake, food, direction, foodIsEaten;
 const canvasWidth = 500;
 const canvasHeight = 500;
 
@@ -34,6 +34,7 @@ const start = () => {
   ];
 
   food = [];
+  foodIsEaten = true;
   direction = 99; //wont go anywhere
   setInterval(updateSnakePosition, 20); //speed of snake
 }
